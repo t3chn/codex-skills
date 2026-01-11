@@ -10,6 +10,11 @@ A curated collection of professional skills, knowledge, and expertise.
 
 This repository serves as a comprehensive documentation of skills, technologies, and competencies. It's continuously updated as new skills are acquired and existing ones are refined.
 
+## Skills
+
+### Brainstorming
+**`brainstorming/`** - Turn ideas into fully formed designs through collaborative dialogue. Explores user intent, requirements, and design before implementation.
+
 ## Structure
 
 Skills are organized by category and include practical examples, best practices, and relevant resources.
