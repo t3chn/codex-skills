@@ -1,1 +1,18 @@
+# Build artifacts
 /dist/
+
+# Local Gas Town / beads state
+.beads/
+.claude/
+
+# Old structure (preserved in backup/pre-codex-restructure)
+plugins/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+
+# Node
+node_modules/
