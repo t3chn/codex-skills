@@ -1,0 +1,47 @@
+# Introduction
+
+URL: https://www.greptile.com/docs/api-reference/introduction
+
+Greptile indexes large repos and then answers hard questions about them in natural language. Think of it as an **AI expert on your codebase** , available as an API.
+Example queries:
+
+1. How does auth work in this codebase?
+2. Generate a comment for this PR with codebase context
+3. How would I add pagination to the `/retrieve` endpoint?
+
+You can use the API in many ways:
+
+1. Integrate with **Slack** to answer codebase questions.
+2. Integrate with **Sentry** to enrich alerts with codebase context, diagnoses, and resolution steps.
+3. Integrate with **GitHub** to review PRs and comment on new issues.
+
+```
+We offer a growing list of [first-party integrations](https://app.greptile.com/login), or you can use the API to build your own.
+```
+
+### Order of Operations
+
+Index repo(s)
+
+Query repos
+
+Search repos
+
+### Base URL
+
+```
+The base URL for all API requests is `https://api.greptile.com/v2/`.
+```
+
+### Authentication
+
+Two tokens are required:
+**Greptile API key** :
+Include the API key in the request header: `Authorization: Bearer <API_KEY>`.
+```
+You can get your API key [here](https://app.greptile.com/login).
+```
+**GitHub Token** :
+Include this header with your GitHub/GitLab access token for operations requiring repository access:
+`X-GitHub-Token: <ACCESS_TOKEN>`.
+*Note: The read permissions on the GitHub/GitLab token determine which repos Greptile can reference in its answers.*
