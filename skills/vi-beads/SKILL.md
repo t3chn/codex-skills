@@ -57,6 +57,21 @@ Essential commands: `bd ready`, `bd create`, `bd show`, `bd update`, `bd close`,
 5. `bd close <id> --reason "..."` — Complete task
 6. `bd sync` — Persist to git (always run at session end)
 
+## Sync Branch (Protected main, worktrees)
+
+If your repo uses protected branches or `git worktree`, configure a dedicated sync branch so `bd` can commit/push beads data without touching your current branch.
+
+Recommended (team/shared, version-controlled): add to `.beads/config.yaml`:
+
+```yaml
+sync-branch: beads-sync
+```
+
+Other options:
+- Per-user default for all repos: `~/.config/bd/config.yaml` (`sync-branch: ...`)
+- Temporary override: `BEADS_SYNC_BRANCH=...`
+- Legacy/DB-backed: `bd config set sync.branch <branch>` (also updates `sync-branch` in config.yaml when possible)
+
 ## Advanced Features
 
 | Feature | CLI | Resource |

@@ -70,14 +70,23 @@ bd doctor --deep      # Validates graph integrity across all refs
 
 ## Protected Branch Workflows
 
-For repos with protected `main` branch:
+If your repo uses protected `main`/`master`, beads can commit issue data to a dedicated sync branch (without touching your current branch).
 
 ```bash
-bd init --branch beads-metadata    # Use separate branch for beads data
-bd init --contributor              # Auto-configure sync.remote=upstream for forks
+bd init --branch beads-sync        # Humans do this once
+bd init --contributor              # Optional: fork-friendly defaults
 ```
 
-This creates `.git/beads-worktrees/` for internal management.
+Recommended configuration source of truth is `.beads/config.yaml` (version-controlled):
+
+```yaml
+sync-branch: beads-sync
+```
+
+Notes:
+- Without a configured sync branch, daemon is auto-disabled inside `git worktree` for safety.
+- Effective precedence is `BEADS_SYNC_BRANCH` → `.beads/config.yaml` `sync-branch` → DB config `sync.branch` (legacy).
+- `bd config get sync.branch` shows the effective value (honors env/config.yaml overrides).
 
 ## Multi-Clone Support
 
