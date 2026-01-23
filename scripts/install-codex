@@ -6,6 +6,9 @@ src_dir="$repo_root/skills"
 dest_dir="${HOME}/.codex/skills"
 prefix="vi-"
 
+python3 "$repo_root/scripts/check-skills-english.py" --skills-dir "$src_dir"
+python3 "$repo_root/scripts/check-skills-frontmatter.py" --skills-dir "$src_dir"
+
 if [[ ! -d "$src_dir" ]]; then
   echo "[ERROR] Source directory not found: $src_dir" >&2
   exit 1

@@ -1,0 +1,15 @@
+repos:
+  - repo: local
+    hooks:
+      - id: skills-frontmatter
+        name: Validate SKILL.md YAML front matter
+        entry: python3 scripts/check-skills-frontmatter.py
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: skills-english-only
+        name: Enforce English-only skill docs
+        entry: python3 scripts/check-skills-english.py
+        language: system
+        pass_filenames: false
+        always_run: true

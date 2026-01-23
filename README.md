@@ -16,6 +16,18 @@ Install into `~/.codex/skills` (full sync, overwrites `~/.codex/skills/vi-*`):
 ./scripts/install-codex
 ```
 
+## Pre-commit
+
+If you use `pre-commit`, this repo includes local hooks that:
+
+- validate `SKILL.md` YAML front matter
+- enforce English-only skill documentation
+
+```bash
+pre-commit install
+pre-commit run --all-files
+```
+
 Included skills:
 
 - `vi-brainstorming` — Turn ideas into validated design docs before implementation.
