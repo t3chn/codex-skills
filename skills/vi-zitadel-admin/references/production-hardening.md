@@ -4,8 +4,8 @@ Use this as a day-2 checklist to close common reliability and security gaps in a
 
 Upstream reference (recommended to cross-check):
 
-- Local: `~/contrib/zitadel/docs/docs/self-hosting/manage/productionchecklist.md`
 - Online: https://zitadel.com/docs/self-hosting/manage/productionchecklist
+- Repo path (optional): `docs/docs/self-hosting/manage/productionchecklist.md`
 
 ## Infrastructure
 

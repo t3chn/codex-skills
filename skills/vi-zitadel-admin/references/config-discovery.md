@@ -4,25 +4,27 @@ Use this when you need to find the right configuration key, decide whether it be
 
 ## Source of truth
 
-Prefer these files from the ZITADEL repo you are operating against:
+Canonical sources:
 
-- Runtime defaults: `~/contrib/zitadel/cmd/defaults.yaml`
-- Setup steps defaults: `~/contrib/zitadel/cmd/setup/steps.yaml`
+- Runtime defaults: https://github.com/zitadel/zitadel/blob/main/cmd/defaults.yaml
+- Setup steps defaults: https://github.com/zitadel/zitadel/blob/main/cmd/setup/steps.yaml
+- Configuration guide (runtime vs steps, merge behavior, masterkey): https://zitadel.com/docs/self-hosting/manage/configure/configure
 
 Both files also show the corresponding environment variable names in `# ZITADEL_...` comments.
 
-If you do not have the repo locally, use the upstream equivalents:
+If you have a local clone, use it for fast/offline search (any path). Example:
 
-- https://github.com/zitadel/zitadel/blob/main/cmd/defaults.yaml
-- https://github.com/zitadel/zitadel/blob/main/cmd/setup/steps.yaml
+```bash
+export ZITADEL_REPO=~/contrib/zitadel
+```
 
 ## Fast search recipes
 
-- List all runtime env vars: `rg -n \"#\\s*ZITADEL_[A-Z0-9_]+\" ~/contrib/zitadel/cmd/defaults.yaml`
-- List all setup-step env vars: `rg -n \"#\\s*ZITADEL_[A-Z0-9_]+\" ~/contrib/zitadel/cmd/setup/steps.yaml`
-- Jump to external access keys: `rg -n \"^External(Domain|Port|Secure):\" ~/contrib/zitadel/cmd/defaults.yaml`
-- Jump to database keys: `rg -n \"^Database:\" ~/contrib/zitadel/cmd/defaults.yaml`
-- Jump to first admin user defaults: `rg -n \"^FirstInstance:\" ~/contrib/zitadel/cmd/setup/steps.yaml`
+- List all runtime env vars: `rg -n \"#\\s*ZITADEL_[A-Z0-9_]+\" \"$ZITADEL_REPO/cmd/defaults.yaml\"`
+- List all setup-step env vars: `rg -n \"#\\s*ZITADEL_[A-Z0-9_]+\" \"$ZITADEL_REPO/cmd/setup/steps.yaml\"`
+- Jump to external access keys: `rg -n \"^External(Domain|Port|Secure):\" \"$ZITADEL_REPO/cmd/defaults.yaml\"`
+- Jump to database keys: `rg -n \"^Database:\" \"$ZITADEL_REPO/cmd/defaults.yaml\"`
+- Jump to first admin user defaults: `rg -n \"^FirstInstance:\" \"$ZITADEL_REPO/cmd/setup/steps.yaml\"`
 
 ## Runtime vs steps: what goes where
 
@@ -54,10 +56,12 @@ Prefer one of:
 
 Avoid committing or logging the masterkey. Treat it like a database encryption root key.
 
-## Useful offline docs in the repo
+## Local docs (optional)
 
-If `~/contrib/zitadel` exists, the self-hosting docs include examples and explanations:
+If you have a local clone, the self-hosting docs include examples and explanations:
 
-- `~/contrib/zitadel/docs/docs/self-hosting/manage/configure/`
-- `~/contrib/zitadel/docs/docs/self-hosting/manage/updating_scaling.md`
-- `~/contrib/zitadel/docs/docs/self-hosting/manage/productionchecklist.md`
+- `$ZITADEL_REPO/docs/docs/self-hosting/manage/configure/`
+- `$ZITADEL_REPO/docs/docs/self-hosting/manage/updating_scaling.md`
+- `$ZITADEL_REPO/docs/docs/self-hosting/manage/productionchecklist.md`
+
+If you do not have a local clone, use the online docs: https://zitadel.com/docs/self-hosting

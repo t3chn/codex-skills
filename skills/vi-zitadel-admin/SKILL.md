@@ -14,15 +14,15 @@ Administer ZITADEL (self-hosted) via configuration and operational workflows. Av
 - External access: `ExternalDomain`, TLS termination (`--tlsMode`), reverse proxy/WAF/CDN, HTTP/2/h2c
 - Config delivery: where `--config` and `--steps` files live; how `--masterkey*` is provided
 
-## Source of truth (local)
+## Source of truth (upstream)
 
-Prefer using the checked-out ZITADEL repo as the authoritative config catalog:
+Use the upstream ZITADEL repo + docs as the authoritative config catalog:
 
-- Runtime defaults + env var mapping: `~/contrib/zitadel/cmd/defaults.yaml`
-- Setup steps defaults + env var mapping: `~/contrib/zitadel/cmd/setup/steps.yaml`
-- Self-hosting docs (offline): `~/contrib/zitadel/docs/docs/self-hosting/manage/`
+- Runtime defaults + env var mapping: https://github.com/zitadel/zitadel/blob/main/cmd/defaults.yaml
+- Setup steps defaults + env var mapping: https://github.com/zitadel/zitadel/blob/main/cmd/setup/steps.yaml
+- Self-hosting docs: https://zitadel.com/docs/self-hosting
 
-If the repo isn’t available, fall back to https://zitadel.com/docs and the upstream GitHub paths referenced above.
+If you have a local clone, prefer grepping local files for speed/offline work (any path; example: `~/contrib/zitadel`).
 
 ## Recommended workflow
 
@@ -41,9 +41,9 @@ If the repo isn’t available, fall back to https://zitadel.com/docs and the ups
 
 ## Common tasks (short recipes)
 
-- **Find config keys**: search `~/contrib/zitadel/cmd/defaults.yaml` and `~/contrib/zitadel/cmd/setup/steps.yaml` (look for `# ZITADEL_...` comments).
+- **Find config keys**: search `cmd/defaults.yaml` and `cmd/setup/steps.yaml` in the ZITADEL repo (look for `# ZITADEL_...` comments).
 - **Fix “Instance not found”**: validate `ExternalDomain/Port/Secure`, reverse proxy host headers, then rerun `zitadel setup`.
-- **Prepare for production**: follow `references/production-hardening.md` and cross-check upstream `productionchecklist.md`.
+- **Prepare for production**: follow `references/production-hardening.md` and cross-check the upstream production checklist.
 - **Plan upgrades and scaling**: use `references/upgrade-scaling.md` (init/setup/start separation, probes, zero downtime).
 - **Validate database posture**: use `references/database.md` (supported versions, credential rotation, v2→v3 CRDB migration notes).
 - **Verify HTTP/2 + TLS**: use `references/networking-http2-tls.md`.

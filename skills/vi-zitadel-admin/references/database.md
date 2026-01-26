@@ -4,21 +4,21 @@ Use this when configuring the database, rotating credentials, planning backups, 
 
 Upstream reference (recommended):
 
-- Local: `~/contrib/zitadel/docs/docs/self-hosting/manage/database/`
 - Online: https://zitadel.com/docs/self-hosting/manage/database
+- Repo path (optional): `docs/docs/self-hosting/manage/database/`
 
 ## Pick the right database for your ZITADEL version
 
 - **ZITADEL v3**: Postgres only (CockroachDB support removed).
 - **ZITADEL v2**: Postgres or CockroachDB (depending on your deployment and version).
 
-Confirm by checking the runtime defaults in `~/contrib/zitadel/cmd/defaults.yaml` for your exact version.
+Confirm by checking the runtime defaults in `cmd/defaults.yaml` for your exact version (or https://github.com/zitadel/zitadel/blob/main/cmd/defaults.yaml).
 
 ## Postgres (recommended)
 
 Supported versions (per upstream docs): 14 to 17.
 
-Key config area: `Database.postgres.*` in `~/contrib/zitadel/cmd/defaults.yaml`.
+Key config area: `Database.postgres.*` in `cmd/defaults.yaml`.
 
 If you want to avoid storing admin DB credentials in ZITADEL config, pre-provision DB + user:
 
@@ -53,5 +53,5 @@ Use the ZITADEL `mirror` command to copy data between databases.
 
 See `references/migration-crdb-to-pg.md` and the upstream mirror guide:
 
-- Local: `~/contrib/zitadel/docs/docs/self-hosting/manage/cli/mirror.mdx`
 - Online: https://zitadel.com/docs/self-hosting/manage/cli/mirror
+- Repo path (optional): `docs/docs/self-hosting/manage/cli/mirror.mdx`

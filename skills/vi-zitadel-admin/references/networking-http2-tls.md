@@ -4,10 +4,12 @@ Use this when configuring external access, reverse proxies, or debugging console
 
 Upstream references:
 
-- External access and "Instance not found": `~/contrib/zitadel/docs/docs/self-hosting/manage/custom-domain.md`
-- TLS modes: `~/contrib/zitadel/docs/docs/self-hosting/manage/tls_modes.mdx`
-- HTTP/2 requirement: `~/contrib/zitadel/docs/docs/self-hosting/manage/http2.mdx`
-- Reverse proxy examples: `~/contrib/zitadel/docs/docs/self-hosting/manage/reverseproxy/`
+- External access and "Instance not found": https://zitadel.com/docs/self-hosting/manage/custom-domain
+- TLS modes: https://zitadel.com/docs/self-hosting/manage/tls_modes
+- HTTP/2 requirement: https://zitadel.com/docs/self-hosting/manage/http2
+- Reverse proxy examples: https://zitadel.com/docs/self-hosting/manage/reverseproxy/reverse_proxy
+
+Repo path (optional): `docs/docs/self-hosting/manage/` (files: `custom-domain.md`, `tls_modes.mdx`, `http2.mdx`, reverse proxy examples under `reverseproxy/`).
 
 ## ExternalDomain, ExternalPort, ExternalSecure
 

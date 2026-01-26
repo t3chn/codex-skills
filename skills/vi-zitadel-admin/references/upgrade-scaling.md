@@ -4,8 +4,8 @@ Use this when planning installs, upgrades, or horizontal scaling, and when diagn
 
 Upstream reference (recommended):
 
-- Local: `~/contrib/zitadel/docs/docs/self-hosting/manage/updating_scaling.md`
 - Online: https://zitadel.com/docs/self-hosting/manage/updating_scaling
+- Repo path (optional): `docs/docs/self-hosting/manage/updating_scaling.md`
 
 ## Phases
 

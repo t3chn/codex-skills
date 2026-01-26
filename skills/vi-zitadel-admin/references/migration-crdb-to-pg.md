@@ -4,8 +4,8 @@ Use this when moving a ZITADEL v2 deployment off CockroachDB (for example to pre
 
 Upstream reference (recommended):
 
-- Local: `~/contrib/zitadel/docs/docs/self-hosting/manage/cli/mirror.mdx`
 - Online: https://zitadel.com/docs/self-hosting/manage/cli/mirror
+- Repo path (optional): `docs/docs/self-hosting/manage/cli/mirror.mdx`
 
 ## High-level flow
 

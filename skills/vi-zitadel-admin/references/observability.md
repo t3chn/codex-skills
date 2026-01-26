@@ -11,8 +11,8 @@ ZITADEL exposes:
 
 Upstream reference:
 
-- Local: `~/contrib/zitadel/docs/docs/apis/observability/health.md`
 - Online: https://zitadel.com/docs/apis/observability/health
+- Repo path (optional): `docs/docs/apis/observability/health.md`
 
 ## Metrics
 
@@ -22,8 +22,8 @@ Metrics endpoint:
 
 Upstream reference:
 
-- Local: `~/contrib/zitadel/docs/docs/self-hosting/manage/metrics/overview.mdx`
 - Online: https://zitadel.com/docs/self-hosting/manage/metrics
+- Repo path (optional): `docs/docs/self-hosting/manage/metrics/overview.mdx`
 
 ## Logging
 
@@ -31,8 +31,8 @@ Prefer shipping logs to stdout/stderr and collecting them via your platform (jou
 
 To adjust log level, format, and exporters, consult:
 
-- `~/contrib/zitadel/cmd/defaults.yaml` (Instrumentation + legacy logging sections)
-- `~/contrib/zitadel/docs/docs/self-hosting/manage/production.md` (logging discussion)
+- `cmd/defaults.yaml` (Instrumentation + legacy logging sections) or https://github.com/zitadel/zitadel/blob/main/cmd/defaults.yaml
+- https://zitadel.com/docs/self-hosting/manage/production (logging discussion)
 
 ## Minimal alert set (practical)
 
