@@ -1,0 +1,8 @@
+{
+  "name": "vi-zitadel-admin",
+  "version": "1.0.0",
+  "description": "Self-hosted ZITADEL administration and day-2 operations skill",
+  "author": {
+    "name": "vi"
+  }
+}
