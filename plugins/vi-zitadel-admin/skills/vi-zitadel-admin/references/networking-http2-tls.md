@@ -4,10 +4,12 @@ Use this when configuring external access, reverse proxies, or debugging console
 
 Upstream references:
 
-- External access and "Instance not found": `{zitadel_repo}/docs/docs/self-hosting/manage/custom-domain.md`
-- TLS modes: `{zitadel_repo}/docs/docs/self-hosting/manage/tls_modes.mdx`
-- HTTP/2 requirement: `{zitadel_repo}/docs/docs/self-hosting/manage/http2.mdx`
-- Reverse proxy examples: `{zitadel_repo}/docs/docs/self-hosting/manage/reverseproxy/`
+- External access and "Instance not found": https://zitadel.com/docs/self-hosting/manage/custom-domain
+- TLS modes: https://zitadel.com/docs/self-hosting/manage/tls_modes
+- HTTP/2 requirement: https://zitadel.com/docs/self-hosting/manage/http2
+- Reverse proxy examples: https://zitadel.com/docs/self-hosting/manage/reverseproxy/reverse_proxy
+
+Repo path (optional): `docs/docs/self-hosting/manage/` (files: `custom-domain.md`, `tls_modes.mdx`, `http2.mdx`, reverse proxy examples under `reverseproxy/`).
 
 ## ExternalDomain, ExternalPort, ExternalSecure
 
@@ -16,7 +18,7 @@ ZITADEL serves requests only for the expected protocol/host/port.
 - Set `ExternalDomain`, `ExternalPort`, `ExternalSecure` to match how end users reach ZITADEL.
 - After changing any of these, rerun `zitadel setup` so the system picks up the changes.
 
-## TLS Modes
+## TLS modes
 
 ZITADEL supports three operational modes (often configured via `--tlsMode`):
 
@@ -26,14 +28,14 @@ ZITADEL supports three operational modes (often configured via `--tlsMode`):
 
 Pick the mode that matches your network boundary and certificate management.
 
-## HTTP/2 and h2c (Common Pitfall)
+## HTTP/2 and h2c (common pitfall)
 
-ZITADEL uses HTTP/2 for gRPC and the console (gRPC-Web). The reverse proxy must support HTTP/2 end-to-end.
+ZITADEL uses HTTP/2 for gRPC and the console (gRPC-Web). Your reverse proxy must support HTTP/2 end-to-end.
 
 - If TLS is terminated upstream and traffic to ZITADEL is plaintext, ensure the proxy supports **h2c** to ZITADEL.
 - If the console shows gRPC errors or fails to load, suspect missing HTTP/2 or incorrect proxy config first.
 
-## Reverse Proxy Header Handling
+## Reverse proxy header handling
 
 ZITADEL uses the request Host header (or forwarded host) to select the virtual instance.
 
@@ -48,7 +50,7 @@ If users see "Instance not found", validate:
 - proxy sends correct Host / forwarded host
 - `zitadel setup` has been rerun after changing external settings
 
-## Performance Notes
+## Performance notes
 
-- Enable compression (gzip/brotli) for UI assets if the proxy supports it.
+- Enable compression (gzip/brotli) for UI assets if your proxy supports it.
 - Consider a CDN for static assets to reduce latency and offload traffic.

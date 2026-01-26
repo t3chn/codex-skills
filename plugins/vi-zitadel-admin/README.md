@@ -28,24 +28,15 @@ ln -s /path/to/vi-zitadel-admin ~/.claude/plugins/vi-zitadel-admin
 cp -r /path/to/vi-zitadel-admin ~/.claude/plugins/
 ```
 
-## Configuration
+## Source of Truth
 
-### ZITADEL Repository Path
+The skill uses upstream ZITADEL documentation as the authoritative source:
 
-Create a settings file at `.claude/vi-zitadel-admin.local.md` in your project to configure the local ZITADEL repository path:
+- Runtime defaults: https://github.com/zitadel/zitadel/blob/main/cmd/defaults.yaml
+- Setup steps: https://github.com/zitadel/zitadel/blob/main/cmd/setup/steps.yaml
+- Self-hosting docs: https://zitadel.com/docs/self-hosting
 
-```yaml
----
-zitadel_repo: ~/contrib/zitadel
----
-```
-
-If not configured, the skill defaults to `~/contrib/zitadel`.
-
-The local ZITADEL repo is used as the authoritative source for:
-- `cmd/defaults.yaml` - Runtime configuration defaults
-- `cmd/setup/steps.yaml` - Setup steps defaults
-- `docs/docs/self-hosting/manage/` - Offline documentation
+If you have a local ZITADEL repo clone, the skill can use it for faster offline search.
 
 ## Usage
 

@@ -1,8 +1,8 @@
-# Observability and Operational Signals
+# Observability and operational signals
 
 Use this when wiring monitoring/alerting or when diagnosing availability/performance issues.
 
-## Health and Readiness
+## Health and readiness
 
 ZITADEL exposes:
 
@@ -11,8 +11,8 @@ ZITADEL exposes:
 
 Upstream reference:
 
-- Local: `{zitadel_repo}/docs/docs/apis/observability/health.md`
 - Online: https://zitadel.com/docs/apis/observability/health
+- Repo path (optional): `docs/docs/apis/observability/health.md`
 
 ## Metrics
 
@@ -22,8 +22,8 @@ Metrics endpoint:
 
 Upstream reference:
 
-- Local: `{zitadel_repo}/docs/docs/self-hosting/manage/metrics/overview.mdx`
 - Online: https://zitadel.com/docs/self-hosting/manage/metrics
+- Repo path (optional): `docs/docs/self-hosting/manage/metrics/overview.mdx`
 
 ## Logging
 
@@ -31,10 +31,10 @@ Prefer shipping logs to stdout/stderr and collecting them via your platform (jou
 
 To adjust log level, format, and exporters, consult:
 
-- `{zitadel_repo}/cmd/defaults.yaml` (Instrumentation + legacy logging sections)
-- `{zitadel_repo}/docs/docs/self-hosting/manage/production.md` (logging discussion)
+- `cmd/defaults.yaml` (Instrumentation + legacy logging sections) or https://github.com/zitadel/zitadel/blob/main/cmd/defaults.yaml
+- https://zitadel.com/docs/self-hosting/manage/production (logging discussion)
 
-## Minimal Alert Set (Practical)
+## Minimal alert set (practical)
 
 - Readiness fails for N minutes (no traffic should be routed)
 - Liveness fails (process crash loop)
@@ -42,7 +42,7 @@ To adjust log level, format, and exporters, consult:
 - Database connection saturation / long query times
 - TLS certificate expiry within X days
 
-## Troubleshooting Shortcuts
+## Troubleshooting shortcuts
 
 - If readiness fails but liveness succeeds, suspect migrations/setup, database connectivity, or projections catching up.
 - If console/API calls fail in-browser, validate HTTP/2 and proxy config (see `references/networking-http2-tls.md`).

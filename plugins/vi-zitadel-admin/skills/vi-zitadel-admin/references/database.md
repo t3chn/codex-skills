@@ -1,26 +1,26 @@
-# Database Operations (Postgres vs CockroachDB)
+# Database operations (Postgres vs CockroachDB)
 
 Use this when configuring the database, rotating credentials, planning backups, or migrating between database vendors.
 
 Upstream reference (recommended):
 
-- Local: `{zitadel_repo}/docs/docs/self-hosting/manage/database/`
 - Online: https://zitadel.com/docs/self-hosting/manage/database
+- Repo path (optional): `docs/docs/self-hosting/manage/database/`
 
-## Pick the Right Database for Your ZITADEL Version
+## Pick the right database for your ZITADEL version
 
 - **ZITADEL v3**: Postgres only (CockroachDB support removed).
 - **ZITADEL v2**: Postgres or CockroachDB (depending on your deployment and version).
 
-Confirm by checking the runtime defaults in `{zitadel_repo}/cmd/defaults.yaml` for the exact version.
+Confirm by checking the runtime defaults in `cmd/defaults.yaml` for your exact version (or https://github.com/zitadel/zitadel/blob/main/cmd/defaults.yaml).
 
-## Postgres (Recommended)
+## Postgres (recommended)
 
 Supported versions (per upstream docs): 14 to 17.
 
-Key config area: `Database.postgres.*` in `{zitadel_repo}/cmd/defaults.yaml`.
+Key config area: `Database.postgres.*` in `cmd/defaults.yaml`.
 
-If avoiding storing admin DB credentials in ZITADEL config, pre-provision DB + user:
+If you want to avoid storing admin DB credentials in ZITADEL config, pre-provision DB + user:
 
 ```sql
 CREATE ROLE zitadel LOGIN;
@@ -30,7 +30,7 @@ GRANT CONNECT, CREATE ON DATABASE zitadel TO zitadel;
 
 Then ensure authentication/permissions are correct (for example `pg_hba.conf`) and run `zitadel setup` using only the unprivileged ZITADEL user.
 
-## Credential Rotation (Important Behavior)
+## Credential rotation (important behavior)
 
 `zitadel init` creates the database/user if missing, but it does not rotate passwords or migrate object ownership.
 
@@ -39,7 +39,7 @@ Then ensure authentication/permissions are correct (for example `pg_hba.conf`) a
 
 Do not rely on rerunning `init` to "fix" permissions after changing users.
 
-## Backups and Restore Tests
+## Backups and restore tests
 
 ZITADEL is event-sourced; the database is the source of truth.
 
@@ -47,11 +47,11 @@ ZITADEL is event-sourced; the database is the source of truth.
 - Regularly test restores to a staging environment.
 - After restore/cutover, ensure the deployed ZITADEL version runs `setup` before serving traffic.
 
-## Migrating CockroachDB -> Postgres (v2 to v3 Path)
+## Migrating CockroachDB -> Postgres (v2 to v3 path)
 
 Use the ZITADEL `mirror` command to copy data between databases.
 
 See `references/migration-crdb-to-pg.md` and the upstream mirror guide:
 
-- Local: `{zitadel_repo}/docs/docs/self-hosting/manage/cli/mirror.mdx`
 - Online: https://zitadel.com/docs/self-hosting/manage/cli/mirror
+- Repo path (optional): `docs/docs/self-hosting/manage/cli/mirror.mdx`

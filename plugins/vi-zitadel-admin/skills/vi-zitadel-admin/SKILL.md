@@ -7,17 +7,6 @@ description: This skill should be used when the user asks to "configure ZITADEL"
 
 Administer self-hosted ZITADEL via configuration and operational workflows. Avoid patching ZITADEL source unless explicitly requested.
 
-## Configuration Path
-
-Check the plugin settings file at `.claude/vi-zitadel-admin.local.md` for the ZITADEL repo path. If not configured, use `~/contrib/zitadel` as default.
-
-Example settings file format:
-```yaml
----
-zitadel_repo: ~/contrib/zitadel
----
-```
-
 ## Quick Intake (Ask First)
 
 Before proceeding with ZITADEL tasks, gather context:
@@ -27,15 +16,15 @@ Before proceeding with ZITADEL tasks, gather context:
 - **External access**: `ExternalDomain`, TLS termination (`--tlsMode`), reverse proxy/WAF/CDN, HTTP/2/h2c
 - **Config delivery**: where `--config` and `--steps` files live; how `--masterkey*` is provided
 
-## Source of Truth
+## Source of Truth (Upstream)
 
-Prefer the checked-out ZITADEL repo as the authoritative config catalog:
+Use the upstream ZITADEL repo + docs as the authoritative config catalog:
 
-- Runtime defaults + env var mapping: `{zitadel_repo}/cmd/defaults.yaml`
-- Setup steps defaults + env var mapping: `{zitadel_repo}/cmd/setup/steps.yaml`
-- Self-hosting docs (offline): `{zitadel_repo}/docs/docs/self-hosting/manage/`
+- Runtime defaults + env var mapping: https://github.com/zitadel/zitadel/blob/main/cmd/defaults.yaml
+- Setup steps defaults + env var mapping: https://github.com/zitadel/zitadel/blob/main/cmd/setup/steps.yaml
+- Self-hosting docs: https://zitadel.com/docs/self-hosting
 
-If the repo is unavailable, fall back to https://zitadel.com/docs and upstream GitHub paths.
+If there is a local clone, prefer grepping local files for speed/offline work (any path; example: `~/contrib/zitadel`).
 
 ## Recommended Workflow
 
@@ -56,11 +45,7 @@ If the repo is unavailable, fall back to https://zitadel.com/docs and upstream G
 
 ### Find Config Keys
 
-Search the defaults files for configuration options:
-```bash
-rg -n "#\s*ZITADEL_[A-Z0-9_]+" {zitadel_repo}/cmd/defaults.yaml
-rg -n "#\s*ZITADEL_[A-Z0-9_]+" {zitadel_repo}/cmd/setup/steps.yaml
-```
+Search `cmd/defaults.yaml` and `cmd/setup/steps.yaml` in the ZITADEL repo (look for `# ZITADEL_...` comments).
 
 ### Fix "Instance not found"
 
@@ -70,7 +55,7 @@ rg -n "#\s*ZITADEL_[A-Z0-9_]+" {zitadel_repo}/cmd/setup/steps.yaml
 
 ### Prepare for Production
 
-Follow `references/production-hardening.md` and cross-check upstream `productionchecklist.md`.
+Follow `references/production-hardening.md` and cross-check the upstream production checklist.
 
 ### Plan Upgrades and Scaling
 

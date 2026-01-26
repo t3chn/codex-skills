@@ -1,11 +1,11 @@
-# Production Hardening Checklist (Condensed)
+# Production hardening checklist (condensed)
 
 Use this as a day-2 checklist to close common reliability and security gaps in a self-hosted ZITADEL deployment.
 
 Upstream reference (recommended to cross-check):
 
-- Local: `{zitadel_repo}/docs/docs/self-hosting/manage/productionchecklist.md`
 - Online: https://zitadel.com/docs/self-hosting/manage/productionchecklist
+- Repo path (optional): `docs/docs/self-hosting/manage/productionchecklist.md`
 
 ## Infrastructure
 
@@ -13,7 +13,7 @@ Upstream reference (recommended to cross-check):
 - Store secrets in a secret manager (masterkey, DB passwords, SMTP creds, TLS private key).
 - Enforce least-privilege access for operators and CI/CD.
 
-## High Availability
+## High availability
 
 - Run multiple ZITADEL runtimes (stateless), ideally behind an orchestrator (Kubernetes/Knative/Cloud Run).
 - Separate phases for production:
@@ -32,7 +32,7 @@ Upstream reference (recommended to cross-check):
 - Configure rate limits per endpoint group (API vs UI) and ensure IPv6 is covered.
 - Use a CDN for static assets if it improves latency and shields the runtime.
 
-## ZITADEL Configuration (Must-Haves)
+## ZITADEL configuration (must-haves)
 
 - Set external access correctly:
   - `ExternalDomain`, `ExternalPort`, `ExternalSecure`
