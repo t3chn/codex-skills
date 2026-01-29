@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "skills": [
+    {
+      "id": "gastown",
+      "title": "Gastown (Gas Town / gt)",
+      "description": "Use Gas Town (gt) effectively: setup, rigs/crew/polecats, convoys + beads, mail, gt prime; also contribute to github.com/steveyegge/gastown.",
+      "tags": ["gastown", "gt", "gas-town", "beads", "convoy", "multi-agent"],
+      "aliases": ["gas-town"],
+      "targets": {
+        "codex": { "path": "skills/gastown" }
+      }
+    }
+  ]
+}
