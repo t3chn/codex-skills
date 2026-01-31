@@ -24,6 +24,17 @@ CATALOG_REL = Path("catalog/skills.json")
 ID_RE = re.compile(r"^[a-z0-9-]+$")
 SEMVER_RE = re.compile(r"\b(\d+\.\d+\.\d+)\b")
 
+PYTHON_MARKERS = (
+    "pyproject.toml",
+    "requirements.txt",
+    "requirements-dev.txt",
+    "setup.py",
+    "setup.cfg",
+    "poetry.lock",
+    "Pipfile",
+    "uv.lock",
+)
+
 
 class SkillsCtlError(RuntimeError):
     pass
@@ -108,6 +119,10 @@ def _detect_root() -> tuple[Path, bool]:
     if res.returncode == 0 and res.stdout.strip():
         return Path(res.stdout.strip()).resolve(), True
     return Path.cwd().resolve(), False
+
+
+def _is_python_project(root: Path) -> bool:
+    return any((root / marker).exists() for marker in PYTHON_MARKERS)
 
 
 def _looks_like_local_repo_url(repo_url: str) -> bool:
@@ -673,6 +688,9 @@ def cmd_doctor(_args: argparse.Namespace) -> int:
 
     git_version = _extract_semver(_run(["git", "--version"], check=False).stdout.strip() or "")
 
+    python_project = _is_python_project(root)
+    prek_profile = "python" if python_project else "generic"
+
     bd_present = shutil.which("bd") is not None
     bd_version = None
     if bd_present:
@@ -698,6 +716,11 @@ def cmd_doctor(_args: argparse.Namespace) -> int:
         hook_rel = _run(["git", "rev-parse", "--git-path", "hooks/pre-commit"], check=False).stdout.strip()
         if hook_rel:
             precommit_hook_present = (root / hook_rel).exists()
+
+    needs_bd = not beads_present
+    needs_prek = (not precommit_config_present) or (
+        is_git_repo and precommit_config_present and not precommit_hook_present
+    )
 
     codex_dir_present = (root / ".codex").exists()
     codex_config_present = (root / CONFIG_REL).exists()
@@ -730,7 +753,12 @@ def cmd_doctor(_args: argparse.Namespace) -> int:
     manifest_present = (root / MANIFEST_REL).exists()
     manifest_ids = _load_manifest(root) if manifest_present else []
 
-    baseline_skills = ["vi-security-guidance", "vi-prek", "vi-beads", "vi-feature-dev"]
+    baseline_skills = ["vi-security-guidance"]
+    if needs_prek:
+        baseline_skills.append("vi-prek")
+    if needs_bd:
+        baseline_skills.append("vi-beads")
+    baseline_skills.append("vi-feature-dev")
     suggest_skills = [s for s in baseline_skills if s not in set(manifest_ids)]
 
     next_steps: list[str] = []
@@ -755,6 +783,8 @@ def cmd_doctor(_args: argparse.Namespace) -> int:
         "git_repo": is_git_repo,
         "repo_root": str(root),
         "git_version": git_version,
+        "python_project": python_project,
+        "prek_profile": prek_profile,
         "bd_present": bd_present,
         "bd_version": bd_version,
         "beads_present": beads_present,
@@ -869,4 +899,3 @@ def cli() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(cli())
-
