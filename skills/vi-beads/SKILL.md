@@ -57,6 +57,15 @@ Essential commands: `bd ready`, `bd create`, `bd show`, `bd update`, `bd close`,
 5. `bd close <id> --reason "..."` — Complete task
 6. `bd sync` — Persist to git (always run at session end)
 
+## Parallel agent workflow (PRs / Coder Tasks)
+
+When multiple agents are working in parallel, treat `.beads/*` as a serialized, shared write surface.
+
+- **One writer**: only the orchestrator updates/closes issues and commits `.beads/issues.jsonl`.
+- **Workers**: do not edit `.beads/*`; produce code changes only (branch/PR name includes the bead id).
+- **After merge**: orchestrator closes the bead(s), runs `bd sync`, and pushes the beads commit.
+- **Conflicts**: if `.beads/issues.jsonl` conflicts, resolve it, then re-run `bd sync` to ensure the DB and JSONL match.
+
 ## Sync Branch (Protected main, worktrees)
 
 If your repo uses protected branches or `git worktree`, configure a dedicated sync branch so `bd` can commit/push beads data without touching your current branch.

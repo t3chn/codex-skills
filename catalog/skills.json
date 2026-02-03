@@ -2,6 +2,22 @@
   "schema_version": 1,
   "skills": [
     {
+      "id": "coder",
+      "title": "Coder (Tasks-first)",
+      "description": "Work with Coder using the `coder` CLI and API, especially Coder Tasks (AI agents in Coder workspaces): create/list/monitor tasks (`coder task create|list|status|logs|send|delete`), pick task templates/presets, and troubleshoot task-template requirements (`coder_ai_task` and `coder_task`). Triggers: Coder, Coder Tasks, coder task, coder_ai_task, AgentAPI, AI Bridge, templates push.",
+      "tags": [
+        "coder",
+        "codex",
+        "skills"
+      ],
+      "aliases": [],
+      "targets": {
+        "codex": {
+          "path": "skills/coder"
+        }
+      }
+    },
+    {
       "id": "gastown",
       "title": "Gastown (Gas Town / gt)",
       "description": "Work with Gas Town (gastown) and the `gt` CLI: install/setup a town (`gt install`), manage rigs/crew/polecats, run mayor/deacon/witness/refinery, use convoys + beads (`bd`) + mail, recover context via `gt prime`, and troubleshoot common failures (doctor, sparse-checkout, routing). Also use when contributing to `github.com/steveyegge/gastown` (Go + Cobra subcommands in `internal/cmd`, templates in `templates/`, wrappers like `gt-codex`). Triggers: gastown/Gas Town/gt/convoy/sling/mayor/deacon/witness/prime/beads/bd (и русские: мэр/полкэт/прайм).",
@@ -250,6 +266,23 @@
       "targets": {
         "codex": {
           "path": "skills/vi-jj-docs"
+        }
+      }
+    },
+    {
+      "id": "vi-orx",
+      "title": "ORX (Beads → Coder Tasks → PR)",
+      "description": "Orchestrate parallel agent development with anti-drift constraints using Beads (`bd`) as the source of truth and Coder Tasks (`coder task`) as execution: define strict scope (Objective/Must-Haves/Non-Goals/Constraints/Verification), spawn tasks, land PRs, and close/sync issues. Triggers: orx, agent drift, feature creep, beads+coworker tasks, parallel tasks.",
+      "tags": [
+        "vi",
+        "orx",
+        "codex",
+        "skills"
+      ],
+      "aliases": [],
+      "targets": {
+        "codex": {
+          "path": "skills/vi-orx"
         }
       }
     },

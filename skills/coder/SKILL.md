@@ -9,6 +9,12 @@ description: "Work with Coder using the `coder` CLI and API, especially Coder Ta
 
 Use Coder Tasks as the primary unit of work (a task runs an agent inside an isolated Coder workspace), and manage tasks from the terminal reliably.
 
+## Key concept: Task ≈ Workspace + prompt
+
+- A Coder **Task** provisions a **backing workspace** and runs an agent with the task prompt.
+- Use **Tasks** for parallel, one-shot agent jobs; use **Workspaces** for interactive development.
+- Cleanup is two layers: deleting a **Task** may not remove the backing **Workspace** (stop/delete it explicitly when needed).
+
 ## Quick start (CLI)
 
 1) Ensure `coder` CLI is installed and authenticated
@@ -22,6 +28,7 @@ Use Coder Tasks as the primary unit of work (a task runs an agent inside an isol
 - From stdin: `echo "<prompt>" | coder task create`
 - Non-interactive: pass `--template`, optional `--preset`, optional `--name`
 - Automation: add `--quiet` to print only the task ID
+- From Beads (recommended for strict scope): `python3 scripts/task_from_beads.py <bead_id> --template <tpl> --preset <preset>`
 
 3) Monitor + iterate
 
@@ -29,9 +36,20 @@ Use Coder Tasks as the primary unit of work (a task runs an agent inside an isol
 - Send follow-ups: `coder task send <task> "<more instructions>"`
 - Inspect logs: `coder task logs <task> -o json`
 
-4) Cleanup
+4) Find the backing workspace (when you need a shell)
+
+- `coder task status <task> -o json` → read `workspace_name`
+- Use normal workspace commands after that: `coder ssh <workspace>`, `coder stop <workspace>`, `coder delete <workspace>`
+
+5) Cleanup
 
 - Delete (no prompt): `coder task delete <task> --yes`
+
+## Git operations from Tasks (important)
+
+HTTPS pushes from Tasks can fail (external auth wrappers, missing scopes, workflow restrictions). Prefer SSH deploy keys for repo write access.
+
+Steps + troubleshooting: `references/git-from-tasks.md`.
 
 ## Task templates (required)
 
@@ -44,6 +62,12 @@ A template becomes Tasks-capable when it defines:
 - An agent module (Codex CLI, Claude Code, etc.) that runs in the workspace and consumes `data.coder_task.me.prompt`
 
 Minimal Terraform snippet + notes: `references/task-template-snippet.md`.
+
+## Subscription auth (Codex + Claude)
+
+- **Codex CLI (ChatGPT subscription)**: login is interactive by default; for headless Tasks, pre-seed `~/.codex/auth.json` in the workspace (e.g., via a sensitive template variable written at startup). If you see an “unsupported model” error, use a ChatGPT-supported Codex model (typically `gpt-5.2-codex`).
+- **Claude Code (subscription)**: generate an OAuth token via `claude setup-token` and pass it to the workspace (e.g., as a sensitive template variable). Avoid storing plaintext tokens in git. If you use OAuth, do not also set `CLAUDE_API_KEY` (pick one auth mode).
+- Set/update template variables non-interactively with `coder templates push <template> --variables-file <yaml> --yes`.
 
 ## API (automation)
 
@@ -61,8 +85,11 @@ Quick reference: `references/api.md`.
 
 - Need the backing workspace: `coder task status <task> -o json` (look for `workspace_name`/IDs), then use normal workspace commands.
 - Task is `error`/unhealthy: start with `coder task logs <task>`.
+- GitHub Actions is stuck in `queued`: check whether Actions is enabled and runners/minutes exist; see `references/git-from-tasks.md`.
 
 ## References (load as needed)
 
 - Task template snippet + design notes: `references/task-template-snippet.md`
 - Tasks API quick reference: `references/api.md`
+- Git auth + deploy keys from Tasks: `references/git-from-tasks.md`
+- Beads → Task prompt generator: `scripts/task_from_beads.py`

@@ -31,6 +31,7 @@ Optional generator: `uvx prek sample-config -f .pre-commit-config.yaml`.
 ### 4) Run hooks and wire into git
 
 - Run locally: `uvx prek run` (staged files) or `uvx prek run --all-files`.
+- If hooks auto-fix files, `uvx prek` may exit non-zero with “files were modified”. Stage/commit the fixes and re-run until clean.
 - Install git hook: `uvx prek install`.
 - Migration from `pre-commit`: run `uvx prek install -f` once to overwrite the existing hook.
 - Undo: `uvx prek uninstall`.
